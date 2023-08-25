@@ -1,0 +1,27 @@
+class Solution:
+    
+    def numMatchingSubseq(self, s: str, words: List[str]) -> int:
+        n=len(words)
+        buckets = [dict() for _ in range(26)]
+        count=0
+        for i in words:
+            tmp=buckets[ord(i[0])-ord('a')].get(i,None)
+            if tmp==None:
+                buckets[ord(i[0])-ord('a')][i]=[0,len(i),1]
+            else:
+                tmp[2]+=1
+        for x in s:
+            def update_func(a,b):
+                nonlocal count
+                nonlocal buckets
+                b[0]+=1
+                if b[0]==b[1]:
+                    count+=b[2]
+                    return False
+                elif a[b[0]]!=x:
+                    buckets[ord(a[b[0]])-ord('a')][a]=b
+                    return False
+                else:
+                    return True
+            buckets[ord(x)-ord('a')]={k:v for (k,v) in buckets[ord(x)-ord('a')].items() if update_func(k,v)}
+        return count

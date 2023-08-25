@@ -1,0 +1,38 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        bnd = defaultdict(int)
+        cnt = defaultdict(int)
+        count=0
+        lng=len(s)
+        l=0
+        r=0
+        for x in t:
+            bnd[x]+=1
+        req_count=len(bnd)
+        
+        i=0
+        while i<len(s) and s[i] not in bnd:
+            i+=1
+        
+        if i==len(s):
+            return ""
+        j=i
+
+        while j<len(s):
+            cnt[s[j]]+=1
+            if cnt[s[j]]==bnd[s[j]]:
+                count+=1
+
+            while cnt[s[i]]>bnd[s[i]]:
+                cnt[s[i]]-=1
+                i+=1
+            if count==req_count and j-i<lng:
+                lng=j-i
+                l=i
+                r=j+1
+            j+=1
+        for k,v in bnd.items():
+            if cnt[k]<v:
+                return ""
+        
+        return s[l:r]
