@@ -155,7 +155,7 @@ while hasNext:
     row['Difficulty']=Q_title_data['difficulty']
     row['Tags']=Q_title_data['topicTags']
     row['Notes']=multiple_replace(note_replaces,x['notes'])
-    row['Path']=os.path.join(code_path,x['id']+"_"+x['titleSlug']+"."+x['lang'])
+    row['Path']=os.path.join(info["code_path"],x['id']+"_"+x['titleSlug']+"."+x['lang'])
     print(accepted_submissions,"\t",row['Title'])
     with open(row['Path'],"w") as f:
       if submission_details!=None:
