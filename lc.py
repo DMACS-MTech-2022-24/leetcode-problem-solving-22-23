@@ -193,9 +193,9 @@ with open(submissions_path,"a+") as f:
         tags+=' , '
       tags+=tag
     f.write("| {} | link:{}[{}] {}{}[{}.{}] | [.{}. {}]#*{}*# | {} | {}".format(submission['Date'],
-            problems_url,
             submission['Path'],
             file_unicode_symbol,
+            problems_url,
             submission['titleSlug'],
             submission['id'],
             submission['Title'],
