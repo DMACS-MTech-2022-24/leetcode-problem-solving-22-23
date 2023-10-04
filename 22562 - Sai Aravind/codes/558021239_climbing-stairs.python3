@@ -1,0 +1,11 @@
+import math
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        a=1
+        b=1
+        for i in range(n):
+            t=b
+            b=a
+            a=a+t
+        return b
+        
