@@ -25,6 +25,8 @@ Use it when opening the leetcode.com after login. \
 This cookie editor will give the LEETCODE_SESSION and csrftoken values. \
 These values must be put in the `info.json` file and must be enclosed with double quotes.
 
+![cookie_editor](Resources/cookie_editor.png "Cookie Editor")
+
 Here is an example `info.json` file.
 ```json
 {
@@ -35,3 +37,8 @@ Here is an example `info.json` file.
 ```
 
 If ever there is any error saying "None value non-subcriptable", refresh the LEETCODE_SESSION and csrftoken values by again getting those values from the brwoser's cookie editor extension.
+
+Whenever a submission is made, remember to write notes for it in the leetcode itself.
+
+![notes](Resources/notes.png "Notes")
+![save_notes](Resources/save_notes.png "Write Notes")
