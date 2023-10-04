@@ -139,9 +139,9 @@ while hasNext:
     if x['statusDisplay']!='Accepted':
       continue
     accepted_submissions+=1
-    Q_title['variables']['titleSlug']=x['question']
+    Q_title['variables']['titleSlug']=x['titleSlug']
     
-    Q_title_data=retry_post(Q_title,"submissionList")
+    Q_title_data=retry_post(Q_title,"question")
 
     Q_title_data['topicTags']=[topic['name'] for topic in Q_title_data['topicTags']]
     data_sumbission_info['variables']['submissionId']=x['id']
