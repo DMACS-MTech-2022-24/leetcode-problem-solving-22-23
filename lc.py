@@ -40,7 +40,7 @@ prv_timestamp=info['timestamp']
 
 # Create the directory for code dump if it does not exists
 if not os.path.exists(code_path):
-  os.mkdirs(code_path)
+  os.makedirs(code_path)
 
 # Create a session and fill the cookies
 session = requests.Session()
@@ -108,13 +108,17 @@ while hasNext:
   for i in range(num_retries):
     response = session.post(graphql_url, headers=headers, json=data_submission_id)
     if response.status_code==200:
-      break
+      data=response.json()
+      if data['data']['submissionList']==None:
+        print("submissionList was none\n Retrying {} for submission list after {} seconds.".format(graphql_url,retry_wait))
+      else:
+        break
     print("Failed with code {} \n Retrying {} for submission list after {} seconds.".format(response.status_code,graphql_url,retry_wait))
     sleep(retry_wait)
   else:
     print("Retries failed")
     exit(2)
-  data=response.json()
+    
   hasNext=data['data']['submissionList']['hasNext']
   submissions_data=data['data']['submissionList']['submissions']
   offset+=limit
