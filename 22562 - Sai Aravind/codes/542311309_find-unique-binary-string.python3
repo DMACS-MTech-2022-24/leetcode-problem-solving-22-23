@@ -1,8 +1,0 @@
-class Solution:
-    def findDifferentBinaryString(self, nums: List[str]) -> str:
-        distinct_nums = sorted(set(map(lambda x : int(x,2),nums)))
-        for i in range(distinct_nums[-1]+1):
-            if i != distinct_nums[i]:
-                return str(bin(i))[2:].zfill(len(nums))
-        return str(bin(i+1))[2:].zfill(len(nums))
-    
