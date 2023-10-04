@@ -159,10 +159,7 @@ while hasNext:
     row['Path']=os.path.join(code_path,x['id']+"_"+x['titleSlug']+"."+x['lang'])
     print(accepted_submissions,"\t",row['Title'])
     with open(row['Path'],"w") as f:
-      if submission_details!=None:
         f.write(submission_details['code'])
-      else:
-        print(response.json())
         
     subs.append(row)
 print(' New Submissions \t{} \n Accepted submissions \t{}'.format(total_submissions,accepted_submissions))
