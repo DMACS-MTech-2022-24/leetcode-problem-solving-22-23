@@ -9,10 +9,11 @@ from time import sleep
 
 script_dir = Path( __file__ ).parent.absolute()
 
-# First create info.json file
+# First create a directory for yourself.
+# create info.json file
 '''
-The program needs the info.json file in the current working directory.
-Create this file.
+The program needs the info.json file in the current working directory and the following is the format.
+
 {
   "timestamp": 0,
   "LEETCODE_SESSION": "LEETCODE_SESSION from browser cookies",
@@ -21,7 +22,11 @@ Create this file.
 '''
 
 # The LEETCODE_SESSION and csrftoken can be found by using a cookie editor extension on a browser.
-# Use it when opening the leetcode.com when logged in.
+# First login to leetcode if not already.
+# Open leetcode.com
+# Open cookie editor on the same tab
+# Find LEETCODE_SESSION and csrftoken and fill it in the info.json file.
+# The copied values of LEETCODE_SESSION and csrftoken must be within double quotes.
 
 # From within your directory run
 # python ../lc.py
@@ -30,6 +35,8 @@ Create this file.
 
 
 problems_url='https://leetcode.com/problems/'
+
+submission_url='https://leetcode.com/problems/{titleSlug}/submissions/{submissionId}/'
 
 code_path="codes/"
 if not os.path.exists(code_path):
@@ -72,149 +79,149 @@ headers = {
     'Content-Type': 'application/json',
 }
 
-data_submission_id={'query':"""
-query submissionList($offset: Int!, $limit: Int!, $questionSlug: String!) {
-     submissionList(
-    offset: $offset
-    limit: $limit
-    questionSlug: $questionSlug
-  ) {
-    hasNext
-    submissions {
-      id
-      timestamp
-      statusDisplay
-      title
-      titleSlug
-      lang
-      notes
-    }
-  }
-}
-""",'variables':{'offset':0,'limit':3,'questionSlug':""}}
+
+submissions_query="""
+submissionList(
+offset: {}
+limit: {}
+questionSlug: "")
+{{
+  hasNext
+  submissions {{
+    id
+    timestamp
+    statusDisplay
+    title
+    titleSlug
+    lang
+    notes
+  }}
+}}
+"""
 
 
-Q_title={"query":"""
-query ($titleSlug: String!) {
-    question(titleSlug: $titleSlug) {
-        questionFrontendId
-        title 
-        difficulty
-        topicTags {
-            name
-        }
-      }
-  }
-""",'variables':{'titleSlug':"two-sum"}}
+question_query="""
+question_{}: question(titleSlug: "{}") {{
+    questionFrontendId
+    title 
+    difficulty
+    topicTags {{ name }}
+  }}
+"""
 
-data_sumbission_info={'query':"""
-query submissionDetails($submissionId: Int!) {
-  submissionDetails(submissionId: $submissionId) {
-    runtimeDisplay
-    memoryDisplay
-    code
-  }
-}
-""",'variables':{"submissionId": 1022704592}}
+code_query="""
+submissionDetails_{}:submissionDetails(submissionId: {}) {{
+  code
+}}
+"""
+
+def get_n_queries(query,args):
+  nqueries=""
+  i=0
+  for x in args:
+    nqueries += query.format(i,x)+","
+    i+=1
+  if nqueries!="":
+    nqueries=nqueries[:-1]
+  return nqueries
+def get_submissions_query(offset,limit):
+  return submissions_query.format(offset,limit)
+
+def make_query(offset,limit,titleSlugs,submissionIds):
+  query={"query":"{"+get_submissions_query(offset,limit)}
+  if titleSlugs:
+    query["query"]+=","+get_n_queries(question_query,titleSlugs)
+  if submissionIds:
+    query["query"]+=","+get_n_queries(code_query,submissionIds)
+  query["query"]+="}"
+  return query
+
+def request_retry(query):
+  for i in range(num_retries):
+    response = session.post(graphql_url, headers=headers, json=query)
+    if response.status_code==200:
+      break
+    print(response._content)
+    print("Failed with code {} \n Retrying {} for submission list after {} seconds.".format(response.status_code,graphql_url,retry_wait))
+    sleep(retry_wait)
+  else:
+    print("Retries failed")
+    exit(2)
+  return response.json()
+
 
 upt_timestamp=prv_timestamp
 offset=0
 limit=10
 hasNext=True
 subs=[]
-total_submissions=0
+submissions_list=[]
 accepted_submissions=0
-while hasNext:
-  data_submission_id['variables']['offset']=offset
-  data_submission_id['variables']['limit']=limit
-
-  for i in range(num_retries):
-    response = session.post(graphql_url, headers=headers, json=data_submission_id)
-    if response.status_code==200:
+cnt=0
+titleSlugs=[]
+submissionIds=[]
+while hasNext or submissions_list:
+  query=make_query(offset,limit,titleSlugs,submissionIds)
+  flag=True
+  while flag:
+    data=request_retry(query)['data']
+    
+    for i in range(len(submissions_list)):
+      cnt+=1
+      print(cnt,"\t",submissions_list[i]["title"])
+      submissions_list[i]['timestamp']=int(submissions_list[i]['timestamp'])
+      upt_timestamp=max(upt_timestamp,submissions_list[i]['timestamp'])
+      submissions_list[i]["date"]=datetime.fromtimestamp(submissions_list[i]['timestamp']).strftime("%d/%m/%Y")
+      submissions_list[i]["tags"]=[topic['name'] for topic in data['question_'+str(i)]["topicTags"]]
+      submissions_list[i]["difficulty"]=data['question_'+str(i)]["difficulty"]
+      submissions_list[i]["questionId"]=data['question_'+str(i)]["questionFrontendId"]
+      submissions_list[i]["notes"]=multiple_replace(note_replaces,submissions_list[i]["notes"])
+      if data['submissionDetails_'+str(i)]==None:
+        print('None found')
+        continue
+      with open(os.path.join(code_path,submissions_list[i]["id"]+"_"+submissions_list[i]['titleSlug']+"."+submissions_list[i]['lang']),"w") as f:
+        f.write(data['submissionDetails_'+str(i)]['code'])
+      subs += submissions_list
       break
-    print("Failed with code {} \n Retrying {} for submission list after {} seconds.".format(response.status_code,graphql_url,retry_wait))
-    sleep(retry_wait)
-  else:
-    print("Retries failed")
-    exit(2)
-  data=response.json()
-  hasNext=data['data']['submissionList']['hasNext']
-  submissions_data=data['data']['submissionList']['submissions']
+
+  if not hasNext:
+    break
+  hasNext=data['submissionList']['hasNext']
+  submissions_list=data['submissionList']['submissions']
+  if int(submissions_list[-1]["timestamp"])<=prv_timestamp:
+    hasNext=False
+  
+  submissions_list=[x for x in submissions_list if x["statusDisplay"]=="Accepted" and int(x["timestamp"])>prv_timestamp]
   offset+=limit
-  for x in submissions_data:
-    x['timestamp']=int(x['timestamp'])
-    upt_timestamp=max(upt_timestamp,x['timestamp'])
-    if x['timestamp']<=prv_timestamp:
-      hasNext=False
-      break
-    row=dict()
-    total_submissions+=1
-    if x['statusDisplay']!='Accepted':
-      continue
-    accepted_submissions+=1
-    Q_title['variables']['titleSlug']=x['titleSlug']
 
-    for i in range(num_retries):
-      response = session.post(graphql_url, headers=headers, json=Q_title)
-      if response.status_code==200:
-        break
-      print("Failed with code {} \n Retrying {} for submission list after {} seconds.".format(response.status_code,graphql_url,retry_wait))
-      sleep(retry_wait)
-    else:
-      print("Retries failed")
-      exit(2)
-    Q_title_data = response.json()['data']['question']
-    Q_title_data['topicTags']=[topic['name'] for topic in Q_title_data['topicTags']]
-    data_sumbission_info['variables']['submissionId']=x['id']
+  titleSlugs=[x['titleSlug'] for x in submissions_list]
+  submissionIds=[x['id'] for x in submissions_list]
+  accepted_submissions+=len(submissions_list)
 
-    for i in range(num_retries):
-      response = session.post(graphql_url, headers=headers, json=data_sumbission_info)
-      if response.status_code==200:
-        break
-      print("Failed with code {} \n Retrying {} for submission list after {} seconds.".format(response.status_code,graphql_url,retry_wait))
-      sleep(retry_wait)
-    else:
-      print("Retries failed")
-      exit(2)
-    submission_details=response.json()['data']['submissionDetails']
-
-    row['Date']=datetime.fromtimestamp(x['timestamp']).strftime("%d/%m/%Y")
-    row['id']=Q_title_data['questionFrontendId']
-    row['Title']=Q_title_data['title']
-    row['titleSlug']=x['titleSlug']
-    row['Difficulty']=Q_title_data['difficulty']
-    row['Tags']=Q_title_data['topicTags']
-    row['Notes']=multiple_replace(note_replaces,x['notes'])
-    print(i,"\t",row['Title'])
-    with open(os.path.join(code_path,x['id']+"_"+x['titleSlug']+"."+x['lang']),"w") as f:
-      f.write(submission_details['code'])
-    subs.append(row)
-print(' New Submissions \t{} \n Accepted submissions \t{}'.format(total_submissions,accepted_submissions))
+print(' Accepted submissions \t{}'.format(accepted_submissions))
 subs.reverse()
 isExist=os.path.exists(submissions_path)
 with open(submissions_path,"a+") as f:
   if not isExist:
-    f.write("""
-[cols="1,3,1,3,6"]
+    f.write(
+"""[cols="1,3,1,3,6"]
 [options="header"]
 |=========================================================
 | Date | Title | Difficulty | Topics | Notes
-    """)
+""")
   for submission in subs:
     tags=''
-    for tag in submission['Tags']:
+    for tag in submission['tags']:
       if tags!='':
         tags+=' , '
       tags+=tag
-    f.write("| {} | {}{}[{}.{}] | [.{}. {}]#*{}*# | {} | {}".format(submission['Date'],
-            problems_url,
-            submission['titleSlug'],
-            submission['id'],
-            submission['Title'],
-            colour_map[submission['Difficulty']],
+    f.write("| {} | {}[{}.{}] | [.{}. {}]#*{}*# | {} | {}\n\n".format(submission['date'],
+            submission_url.format(titleSlug=submission['titleSlug'],submissionId=submission["id"]),
+            submission['title'],
+            colour_map[submission['difficulty']],
             "black",
-            submission['Difficulty'],
-            tags,submission['Notes']))
+            submission['difficulty'],
+            tags,submission['notes']))
 info['timestamp']=upt_timestamp
 with open(info_path,"w")as jsonFile:
   json.dump(info,jsonFile)
