@@ -1,11 +1,20 @@
 # leetcode-problem-solving-22-23
 II MTech 2023-24 leetcode problem's solution
 
+This program, `lc_old.py`, dumps your accepted submission codes and updates a table in your local system. This program stores and updates a timestamp. This timestamp is used to choose only the submissions newer than the timestamp. It updates this timestamp at the end of the program. You will have to commit and push these updates to github remote repository by yourself.
+
+## Usage Instructions
+
+Only on the first time, clone this repository using VS Code by opening a `new window` and clicking on `Clone Git Repository`. Provide it with the details it is asking for.
+
+
+
 ```bash
 # Without angle brakets
 mkdir <reg_no>-<name>
 cd <reg_no>-<name>
 # Now create the info.json file and fill it with things described below.
+# lc_old.py already exists, you just need to run it.
 python ../lc_old.py
 ```
 
