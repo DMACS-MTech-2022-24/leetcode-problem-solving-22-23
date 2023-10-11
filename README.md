@@ -1,19 +1,19 @@
 # leetcode-problem-solving-22-23
 II MTech 2023-24 leetcode problem's solution
 
-This program, `lc.py`, dumps your accepted submission codes and updates a table in your local system. This program stores and updates a timestamp. This timestamp is used to choose only the submissions newer than the timestamp. It updates this timestamp at the end of the program. You will have to commit and push these updates to github remote repository by yourself.
+This program, `lc.py`, dumps your accepted submission codes and updates a table in your local system. This program stores and updates a timestamp. This timestamp is used to choose only the submissions newer than the timestamp. It updates this timestamp at the end of the program. You will have to commit and push these updates to GitHub remote repository by yourself.
 
 ## Usage Instructions
-Fork the github repository.
+Fork the GitHub repository.
 
 ![Fork](Resources/fork.png "Fork")
 
-Only on the first time, clone forked repository using VS Code by opening a `new window` and clicking on `Clone Git Repository`. Provide it with the details it is asking for.
+Only the first time, clone the forked repository using VS Code by opening a `new window` and clicking on `Clone Git Repository`. Provide it with the details it is asking for.
 
 First create `info.json` file
 
 The program needs the `info.json` file in the current working directory.
-Create this file. The content below is a template and not to be used as is.
+Create this file. The content below is a template and is not to be used as is.
 ```json
 {
     "num_retries": 10,
@@ -22,6 +22,8 @@ Create this file. The content below is a template and not to be used as is.
     "problems_url": "https://leetcode.com/problems/",
     "graphql_url": "https://leetcode.com/graphql/",
     "file_unicode_symbol": "&#128193;",
+    "data_file": "data.pkl",
+    "timestamp_file": "README.adoc",
     "limit": 10,
     "note_replaces": {
         "\n": " +\n",
@@ -41,7 +43,7 @@ Create this file. The content below is a template and not to be used as is.
 ```
 Change the values for the following entries. \
 `reg`, `name`, `LEETCODE_SESSION`, `csrftoken`. \
-The value of `reg` is your registration number and the value for `name` is your name
+The value of `reg` is your registration number and the value of `name` is your name
 The `LEETCODE_SESSION` and `csrftoken` can be found by using a cookie editor extension on a browser. \
 Use it when opening the leetcode.com after login. \
 This cookie editor will give the `LEETCODE_SESSION` and `csrftoken` values. \
@@ -58,6 +60,8 @@ Here is an example `info.json` file. This too should not be used as is, it is an
     "problems_url": "https://leetcode.com/problems/",
     "graphql_url": "https://leetcode.com/graphql/",
     "file_unicode_symbol": "&#128193;",
+    "data_file": "data.pkl",
+    "timestamp_file": "README.adoc",
     "limit": 10,
     "note_replaces": {
         "\n": " +\n",
