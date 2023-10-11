@@ -23,6 +23,7 @@ Create this file. The content below is a template and is not to be used as is.
     "graphql_url": "https://leetcode.com/graphql/",
     "file_unicode_symbol": "&#128193;",
     "data_file": "data.pkl",
+    "readme_path": "README.adoc",
     "timestamp_file": "README.adoc",
     "limit": 10,
     "note_replaces": {
@@ -62,6 +63,7 @@ Here is an example `info.json` file. This too should not be used as is, it is an
     "file_unicode_symbol": "&#128193;",
     "data_file": "data.pkl",
     "timestamp_file": "README.adoc",
+    "readme_path": "README.adoc",
     "limit": 10,
     "note_replaces": {
         "\n": " +\n",
