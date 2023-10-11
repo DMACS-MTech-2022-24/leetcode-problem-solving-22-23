@@ -5,6 +5,9 @@ This program, `lc.py`, dumps your accepted submission codes and updates a table 
 
 ## Usage Instructions
 Fork the github repository.
+
+![Fork](Resources/fork.png "Fork")
+
 Only on the first time, clone forked repository using VS Code by opening a `new window` and clicking on `Clone Git Repository`. Provide it with the details it is asking for.
 
 First create `info.json` file
@@ -20,7 +23,6 @@ Create this file. The content below is a template and not to be used as is.
     "graphql_url": "https://leetcode.com/graphql/",
     "file_unicode_symbol": "&#128193;",
     "limit": 10,
-    "timestamp": 0,
     "note_replaces": {
         "\n": " +\n",
         "|": "\\|"
@@ -57,7 +59,6 @@ Here is an example `info.json` file. This too should not be used as is, it is an
     "graphql_url": "https://leetcode.com/graphql/",
     "file_unicode_symbol": "&#128193;",
     "limit": 10,
-    "timestamp": 0,
     "note_replaces": {
         "\n": " +\n",
         "|": "\\|"
@@ -77,10 +78,17 @@ Here is an example `info.json` file. This too should not be used as is, it is an
 
 Now run
 ```bash
-python lc.py
+python lc.py -g
 ```
+The script has three options, `-g`, `-n` and `-r`.
+- The option `-g` gets new submission from leetcode and updates the `data.pkl` file. It then rebuilds the README file.
+- The option `-n` updates the notes it has stored in the `data.pkl` file and then rebuilds the README file.
+- The options `r` rebuilds the README file.
+- Exactly one of these options must be provided at the launch of the program.
 
-If ever there is any error saying "None value non-subcriptable", refresh the `LEETCODE_SESSION` and `csrftoken` values by again getting those values from the brwoser's cookie editor extension.
+If the program exits due to some value being none, even after retying many times, then the problem is either due to internet or due to expiration of `LEETCODE_SESSION` and `csrftoken`. If it is confirmed that the problem is not due to internet then, refresh the `LEETCODE_SESSION` and `csrftoken` values by again getting those values from the brwoser's cookie editor extension.
+
+Each time you will push your submissions only to your forked repository. You can do a pull request to apply these changes to the original repository.
 
 Whenever a submission is made, remember to write notes for it in the leetcode itself.
 
