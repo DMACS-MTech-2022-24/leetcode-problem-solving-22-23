@@ -1,0 +1,27 @@
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        a = 10
+        if x<0:
+            return False
+        y = x
+        leng = len(str(x))
+        b = a**(leng-1)
+        flag = False
+        iterations = leng//2
+        
+        while iterations!=0:
+            m = x%a        #number to check
+            print(m)
+            x = (x-m)//10
+            n = ((y//b)%10)
+
+            print(n)
+            if m!=n:
+                flag = True
+                break
+            b = b//10
+            iterations-=1
+
+        if flag == False:
+            return True
+        else: return False

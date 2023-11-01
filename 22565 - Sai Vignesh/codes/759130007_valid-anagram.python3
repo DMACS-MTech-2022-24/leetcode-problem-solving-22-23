@@ -1,0 +1,15 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        dic = {}
+        for k in s:
+            if k in dic:
+                dic[k]+=1
+            else: dic[k]=1
+        for k in t:
+            if k in dic:
+                dic[k]-=1
+            else: dic[k]=1
+        lst = [k for k,v in dic.items() if v!=0]
+        return not bool(lst)
+            
+        

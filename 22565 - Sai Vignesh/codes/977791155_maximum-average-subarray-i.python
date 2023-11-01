@@ -1,0 +1,21 @@
+class Solution(object):
+    def findMaxAverage(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: float
+        """
+        if len(nums)<k:
+            return(sum(nums)/len(nums))
+
+        i,j=0,k
+        sm = sum(nums[0:j])
+        # print(nums[0:j])
+        avg = sm/float(k)
+        while j<len(nums):
+            print(sm,avg)
+            sm = sm-nums[i]+nums[j]
+            if sm/float(k) > avg : avg = sm/float(k)
+            i+=1
+            j+=1
+        return avg

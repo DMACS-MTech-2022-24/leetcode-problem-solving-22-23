@@ -1,0 +1,15 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        mydict = {'I':1,'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+        integ = 0
+        temp = 0
+        i,leng = 0,len(s)
+        while i < leng:
+            temp = mydict[s[i]]
+            if (i+1) < leng and temp< mydict[s[i+1]]:
+                temp = mydict[s[i+1]]- temp
+                i+=1
+            integ+=temp
+            i+=1
+        return integ
+        

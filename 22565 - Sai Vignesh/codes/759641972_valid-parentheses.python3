@@ -1,0 +1,18 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stac = []
+        left = {"(":1,"[":2,"{":3}
+        right = {")":1,"}":3,"]":2}
+
+        for k in s:
+            if k in left:
+                stac.append(k)
+            else:
+                if bool(stac) and left[stac[-1]] == right[k]:
+                    stac.pop()
+                else:return False
+
+        #print(stac)
+        if bool(stac):
+            return False
+        else: return True
