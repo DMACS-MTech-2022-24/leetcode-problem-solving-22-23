@@ -1,0 +1,14 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        profit=0
+        min_i=prices.index(min(prices))
+        if min_i!=len(prices)-1:
+            profit=max(prices[min_i+1:])-prices[min_i]
+        if profit<=0:
+            profit=0
+        a=0
+        for i in range(min_i-1):
+            a=max(prices[i+1:min_i])-prices[i]
+            if profit<a:
+                profit=a
+        return profit
