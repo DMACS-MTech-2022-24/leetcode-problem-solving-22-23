@@ -1,0 +1,13 @@
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        translation_table = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+        unique_transformations = set()
+        for word in words:
+            translated = ""
+            
+            for char in word:
+                translated += translation_table[(ord(char) - ord('a'))]
+            # print(translated)
+            unique_transformations.add(translated)
+        # print(unique_transformations)
+        return len(unique_transformations)
