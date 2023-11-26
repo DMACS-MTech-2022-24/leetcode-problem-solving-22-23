@@ -1,0 +1,10 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        common = strs[0]
+        for strg in strs[1:]:
+            while strg[:len(common)] != common and common:
+                common = common[:len(common)-1]
+            if not common:
+                break
+        return common
+        

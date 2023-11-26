@@ -1,0 +1,20 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        x_index = -1
+        flag = False
+        leng = len(nums)
+        while x_index <leng :
+            x_index+=1
+            x = nums.pop(0)
+            y_index = x_index+1
+            for y in nums:
+                if x+y == target:
+                    flag = True
+                    break
+                y_index+=1
+            if flag == True:
+                break
+                
+        return [x_index, y_index]
+                
+        
