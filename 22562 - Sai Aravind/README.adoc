@@ -4,7 +4,53 @@
 [options="header"]
 |=========================================================
 | Date | Title | Difficulty | Topics | Notes
-    | 11/10/2023 | link:codes/1072485177_combination-sum.cpp[&#128193;] https://leetcode.com/problems/combination-sum[39.Combination Sum] | [.yellow-background. black]#*Medium*# | Array , Backtracking | Tested Leetcode runtime| 11/10/2023 | link:codes/1072331635_combination-sum.cpp[&#128193;] https://leetcode.com/problems/combination-sum[39.Combination Sum] | [.yellow-background. black]#*Medium*# | Array , Backtracking | Removed the dummy and added a condition to check if the *path* is empty.| 11/10/2023 | link:codes/1072328823_combination-sum.cpp[&#128193;] https://leetcode.com/problems/combination-sum[39.Combination Sum] | [.yellow-background. black]#*Medium*# | Array , Backtracking | 30 mins, +
+    | 15/12/2023 | link:codes/1120038510_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [ Time taken: 13 m 31 s ] +
+Time = O(n log(n)) +
+Space = O(n) +
+Use unordered_set instead of map. Set contains all the nodes with at least 1 outdegree. So, the node we need will not be in the set.| 15/12/2023 | link:codes/1120037490_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [ Time taken: 11 m 51 s ] +
+Time = O(n log(n)) +
+Space = O(n) +
+Use boolean instead of int for value in the map.| 15/12/2023 | link:codes/1120036143_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [ Time taken: 11 m 32 s ] +
+Time = O(n log(n)) +
+Space = O(n) +
+Consider only outdegree. Find the node with 0 out degree.| 15/12/2023 | link:codes/1120035282_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [ Time taken: 10 m 7 s ] +
+Time = O(n log(n)) +
+Space = O(n) +
+Used unordered_map instead of map| 15/12/2023 | link:codes/1120032595_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [Time Taken 4 m 50 s ] +
+Time = O(nlog(n)) +
+Space = O(n) +
+ +
+Find the node with In degree - Out degree = 1| 14/12/2023 | link:codes/1119358317_difference-between-ones-and-zeros-in-row-and-column.cpp[&#128193;] https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column[2482.Difference Between Ones and Zeros in Row and Column] | [.yellow-background. black]#*Medium*# | Array , Matrix , Simulation | Removed the intermediate nums variable.| 14/12/2023 | link:codes/1119354426_difference-between-ones-and-zeros-in-row-and-column.cpp[&#128193;] https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column[2482.Difference Between Ones and Zeros in Row and Column] | [.yellow-background. black]#*Medium*# | Array , Matrix , Simulation | Optimized by removing one if statement. Made a {0,1} -> {-1,1} mapper.| 14/12/2023 | link:codes/1119347601_difference-between-ones-and-zeros-in-row-and-column.cpp[&#128193;] https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column[2482.Difference Between Ones and Zeros in Row and Column] | [.yellow-background. black]#*Medium*# | Array , Matrix , Simulation | [ Time taken: 12 m 5 s ] +
+Time = O(mn) +
+Space = O(m+n) +
+Generate row and column sum separately and then generate the output grid.| 13/12/2023 | link:codes/1118559450_special-positions-in-a-binary-matrix.cpp[&#128193;] https://leetcode.com/problems/special-positions-in-a-binary-matrix[1582.Special Positions in a Binary Matrix] | [.green-background. black]#*Easy*# | Array , Matrix | Tried optimizing by using some references.| 13/12/2023 | link:codes/1118554754_special-positions-in-a-binary-matrix.cpp[&#128193;] https://leetcode.com/problems/special-positions-in-a-binary-matrix[1582.Special Positions in a Binary Matrix] | [.green-background. black]#*Easy*# | Array , Matrix | 30 mins, +
+Time = O(mn) +
+Space = O(m+n) +
+ +
+Have two vectors of pairs. One for rows and another for columns. They will hold the sum of elements of their respective row or column and also the position they last saw a 1.| 12/12/2023 | link:codes/1117715120_maximum-product-of-two-elements-in-an-array.cpp[&#128193;] https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array[1464.Maximum Product of Two Elements in an Array] | [.green-background. black]#*Easy*# | Array , Sorting , Heap (Priority Queue) | 10 mins +
+Time = O(n) +
+Space = O(1) +
+| 07/12/2023 | link:codes/1114166844_largest-odd-number-in-string.cpp[&#128193;] https://leetcode.com/problems/largest-odd-number-in-string[1903.Largest Odd Number in String] | [.green-background. black]#*Easy*# | Math , String , Greedy | using while loop| 07/12/2023 | link:codes/1114165809_largest-odd-number-in-string.cpp[&#128193;] https://leetcode.com/problems/largest-odd-number-in-string[1903.Largest Odd Number in String] | [.green-background. black]#*Easy*# | Math , String , Greedy | for loop with i--| 07/12/2023 | link:codes/1114162408_largest-odd-number-in-string.cpp[&#128193;] https://leetcode.com/problems/largest-odd-number-in-string[1903.Largest Odd Number in String] | [.green-background. black]#*Easy*# | Math , String , Greedy | Used substr instead of erase funcion.| 07/12/2023 | link:codes/1114161242_largest-odd-number-in-string.cpp[&#128193;] https://leetcode.com/problems/largest-odd-number-in-string[1903.Largest Odd Number in String] | [.green-background. black]#*Easy*# | Math , String , Greedy | 5 mins +
+Time = O(n) +
+Space = O(1) +
+Cut off num at the first odd number from right| 02/12/2023 | link:codes/1110952504_find-words-that-can-be-formed-by-characters.cpp[&#128193;] https://leetcode.com/problems/find-words-that-can-be-formed-by-characters[1160.Find Words That Can Be Formed by Characters] | [.green-background. black]#*Easy*# | Array , Hash Table , String | Used goto to avoid an if condition.| 02/12/2023 | link:codes/1110945403_find-words-that-can-be-formed-by-characters.cpp[&#128193;] https://leetcode.com/problems/find-words-that-can-be-formed-by-characters[1160.Find Words That Can Be Formed by Characters] | [.green-background. black]#*Easy*# | Array , Hash Table , String | 15 mins, +
+Let words.size() be n, chars.size() be m and max length of string in words be M +
+Time = O(m+nM) +
+Space = O(m) +
+Compare frequency count of strings in words and chars.| 29/11/2023 | link:codes/1108890274_hamming-distance.cpp[&#128193;] https://leetcode.com/problems/hamming-distance[461.Hamming Distance] | [.green-background. black]#*Easy*# | Bit Manipulation | 1 min +
+Time = O(1) +
+Space = O(1) +
+XOR x and y, then do hamming weight.| 29/11/2023 | link:codes/1108888801_number-of-1-bits.cpp[&#128193;] https://leetcode.com/problems/number-of-1-bits[191.Number of 1 Bits] | [.green-background. black]#*Easy*# | Divide and Conquer , Bit Manipulation | 1 min +
+Time = O(1) +
+Space = O(1) +
+Nothing special| 28/11/2023 | link:codes/1108277036_number-of-ways-to-divide-a-long-corridor.cpp[&#128193;] https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor[2147.Number of Ways to Divide a Long Corridor] | [.red-background. black]#*Hard*# | Math , String , Dynamic Programming | 1 hr +
+Time = O(n) +
+Space = O(1) +
+Optimization +
+removed some unneeded additions.| 28/11/2023 | link:codes/1108264690_number-of-ways-to-divide-a-long-corridor.cpp[&#128193;] https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor[2147.Number of Ways to Divide a Long Corridor] | [.red-background. black]#*Hard*# | Math , String , Dynamic Programming | 1 hr +
+Time = O(n) +
+Space = O(1) +
+Count no. of plants between sections and multiply them together. That gives the no. of combinations.| 11/10/2023 | link:codes/1072485177_combination-sum.cpp[&#128193;] https://leetcode.com/problems/combination-sum[39.Combination Sum] | [.yellow-background. black]#*Medium*# | Array , Backtracking | Tested Leetcode runtime| 11/10/2023 | link:codes/1072331635_combination-sum.cpp[&#128193;] https://leetcode.com/problems/combination-sum[39.Combination Sum] | [.yellow-background. black]#*Medium*# | Array , Backtracking | Removed the dummy and added a condition to check if the *path* is empty.| 11/10/2023 | link:codes/1072328823_combination-sum.cpp[&#128193;] https://leetcode.com/problems/combination-sum[39.Combination Sum] | [.yellow-background. black]#*Medium*# | Array , Backtracking | 30 mins, +
 Time =  +
 Space =  +
 Vector S for storing the next index to add. +
