@@ -4,7 +4,49 @@
 [options="header"]
 |=========================================================
 | Date | Title | Difficulty | Topics | Notes
-    | 15/12/2023 | link:codes/1120038510_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [ Time taken: 13 m 31 s ] +
+    | 18/12/2023 | link:codes/1122272578_maximum-product-difference-between-two-pairs.cpp[&#128193;] https://leetcode.com/problems/maximum-product-difference-between-two-pairs[1913.Maximum Product Difference Between Two Pairs] | [.green-background. black]#*Easy*# | Array , Sorting | Tried using min and max functions for the else part of the two if statements.| 18/12/2023 | link:codes/1122271716_maximum-product-difference-between-two-pairs.cpp[&#128193;] https://leetcode.com/problems/maximum-product-difference-between-two-pairs[1913.Maximum Product Difference Between Two Pairs] | [.green-background. black]#*Easy*# | Array , Sorting | Removed redundant variable initialization.| 18/12/2023 | link:codes/1122269201_maximum-product-difference-between-two-pairs.cpp[&#128193;] https://leetcode.com/problems/maximum-product-difference-between-two-pairs[1913.Maximum Product Difference Between Two Pairs] | [.green-background. black]#*Easy*# | Array , Sorting | [ Time taken: 13 m 46 s ] +
+Time = O(n) +
+Space = O(1) +
+Compute 2 min and 2 max in the same loop. +
+Return difference between min product and max product.| 17/12/2023 | link:codes/1121573580_design-a-food-rating-system.cpp[&#128193;] https://leetcode.com/problems/design-a-food-rating-system[2353.Design a Food Rating System] | [.yellow-background. black]#*Medium*# | Hash Table , Design , Heap (Priority Queue) , Ordered Set | [ Time taken: 43 m 13 s ] +
+Time of changeRating() = O( ln(n) + ln(n) + n + 1 + ln(n) ) +
+Space  of changeRating() = O(1) +
+ +
+Time of highestRated() = O( ln(n) + nm), where m is the maxlength of food names; +
+Space o highestRated()  = O( m ) +
+ +
+Space of FoodRatings class = O( n^2  + n )  +
+ +
+| 17/12/2023 | link:codes/1121573328_design-a-food-rating-system.cpp[&#128193;] https://leetcode.com/problems/design-a-food-rating-system[2353.Design a Food Rating System] | [.yellow-background. black]#*Medium*# | Hash Table , Design , Heap (Priority Queue) , Ordered Set | [ Time taken: 43 m 13 s ]| 16/12/2023 | link:codes/1121144390_fix-names-in-a-table.mysql[&#128193;] https://leetcode.com/problems/fix-names-in-a-table[1667.Fix Names in a Table] | [.green-background. black]#*Easy*# | Database | | 16/12/2023 | link:codes/1121132293_maximum-profit-of-operating-a-centennial-wheel.cpp[&#128193;] https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel[1599.Maximum Profit of Operating a Centennial Wheel] | [.yellow-background. black]#*Medium*# | Array , Simulation | [ Time Taken 30 m 0 s ] +
+Time = O(n) +
+Space = O(1) +
+Tried having a lookup table for cur_profit incremental update. +
+At each iteration save it if its profit is better than before. At the end print based on the optimal profit.| 16/12/2023 | link:codes/1121130250_maximum-profit-of-operating-a-centennial-wheel.cpp[&#128193;] https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel[1599.Maximum Profit of Operating a Centennial Wheel] | [.yellow-background. black]#*Medium*# | Array , Simulation | [ Time Taken 30 m 0 s ] +
+Time = O(n) +
+Space = O(1) +
+Tried incremental updates for cur_profit +
+At each iteration save it if its profit is better than before. At the end print based on the optimal profit.| 16/12/2023 | link:codes/1121125598_maximum-profit-of-operating-a-centennial-wheel.cpp[&#128193;] https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel[1599.Maximum Profit of Operating a Centennial Wheel] | [.yellow-background. black]#*Medium*# | Array , Simulation | [ Time Taken 30 m 0 s ] +
+Time = O(n) +
+Space = O(1) +
+At each iteration save it if its profit is better than before. At the end print based on the optimal profit.| 16/12/2023 | link:codes/1120893075_element-appearing-more-than-25-in-sorted-array.cpp[&#128193;] https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array[1287.Element Appearing More Than 25% In Sorted Array] | [.green-background. black]#*Easy*# | Array | [ Time taken: 3 m 5 s ] +
+Time = O(n) +
+Space = O(1) +
+Linear solution| 16/12/2023 | link:codes/1120763838_transpose-matrix.cpp[&#128193;] https://leetcode.com/problems/transpose-matrix[867.Transpose Matrix] | [.green-background. black]#*Easy*# | Array , Matrix , Simulation | [ Time taken: 1 m 28 s ] +
+Time = O(n^2) +
+Space = O(1) +
+| 16/12/2023 | link:codes/1120746843_valid-anagram.cpp[&#128193;] https://leetcode.com/problems/valid-anagram[242.Valid Anagram] | [.green-background. black]#*Easy*# | Hash Table , String , Sorting | [ Time taken: 1 m 29 s ] +
+Time = O(n+m) +
+Space = O(1) +
+ +
+Have a counter for each alphabet. The count of each alphabet in s and t must be the same, so add the counter with the first string's count and subtract for the second string. another total counter for weeding out some cases.| 15/12/2023 | link:codes/1120445803_element-appearing-more-than-25-in-sorted-array.cpp[&#128193;] https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array[1287.Element Appearing More Than 25% In Sorted Array] | [.green-background. black]#*Easy*# | Array | [ Time Taken 15 m 0 s ] +
+Time = O(n log(n) ) +
+Space = O(n) +
+ +
+Iterate with a step of n/4, if consecutive numbers match then it must be the required number. +
+If not, it must be among the numbers seen in the above iteration. So, use binary search and find a number whose frequency is at least n/4.| 15/12/2023 | link:codes/1120433912_check-if-two-string-arrays-are-equivalent.cpp[&#128193;] https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent[1662.Check If Two String Arrays are Equivalent] | [.green-background. black]#*Easy*# | Array , String | | 15/12/2023 | link:codes/1120431473_check-if-two-string-arrays-are-equivalent.cpp[&#128193;] https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent[1662.Check If Two String Arrays are Equivalent] | [.green-background. black]#*Easy*# | Array , String | Replaced If statements needed for  I J i j variable updation with modulus and boolean addition.| 15/12/2023 | link:codes/1120429965_check-if-two-string-arrays-are-equivalent.cpp[&#128193;] https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent[1662.Check If Two String Arrays are Equivalent] | [.green-background. black]#*Easy*# | Array , String | Removed an unnecessary if statement.| 15/12/2023 | link:codes/1120428419_check-if-two-string-arrays-are-equivalent.cpp[&#128193;] https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent[1662.Check If Two String Arrays are Equivalent] | [.green-background. black]#*Easy*# | Array , String | [ Time Taken 30 m ] +
+Let N be the min of the characters in word1 and word2. +
+Time = O(N) +
+Space = O(1)| 15/12/2023 | link:codes/1120038510_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [ Time taken: 13 m 31 s ] +
 Time = O(n log(n)) +
 Space = O(n) +
 Use unordered_set instead of map. Set contains all the nodes with at least 1 outdegree. So, the node we need will not be in the set.| 15/12/2023 | link:codes/1120037490_destination-city.cpp[&#128193;] https://leetcode.com/problems/destination-city[1436.Destination City] | [.green-background. black]#*Easy*# | Hash Table , String | [ Time taken: 11 m 51 s ] +
